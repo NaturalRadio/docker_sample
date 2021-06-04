@@ -1,0 +1,33 @@
+# [version] docker-composeのバージョン
+version: '3'
+# [services] この下のハッシュにサービスを作りましょう。命名は自由ですが、通常はwebとdbと名付けます。
+services:
+  web:
+    # [build] Dockerfileなどがあるパス（基本的にカレントディレクトリ
+    build: .
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - .:docker_sample
+      # ↓docker-composeコマンドの速度を上げる場合
+      # - .:/project/docker_sample:delegated
+    # [ports] ポート番号。[ホスト：コンテナ]で設定。
+    ports:
+      - 3000:3000
+    # [depends_on]依存関係を示していて、起動順を指定できます。ここではdb→webへと起動します。
+    depends_on:
+      - db
+    tty: true
+    stdin_open: true
+  db:
+    # [image] 使用するimage（dbでMYSQLを指定しています）
+    - mysql-data:/var/lib/mysql
+    # [volumes] ディレクトリのマウント設定（dbデータなどを残せます）
+    volumes:
+      - mysql-data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+    # databaseへ接続するパスワードとデータベース指定
+    environment:
+      MYSQL_ROOT_PASSWORD: 'admin'
+      MYSQL_DATABASE: 'docker_sample_development'
+volumes:
+  db-volume:
