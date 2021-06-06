@@ -7,7 +7,7 @@ services:
     build: .
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
     volumes:
-      - .:docker_sample
+      - .:/docker_sample
       # ↓docker-composeコマンドの速度を上げる場合
       # - .:/project/docker_sample:delegated
     # [ports] ポート番号。[ホスト：コンテナ]で設定。
