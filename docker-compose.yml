@@ -20,7 +20,7 @@ services:
     stdin_open: true
   db:
     # [image] 使用するimage（dbでMYSQLを指定しています）
-    - mysql-data:/var/lib/mysql
+    image: mysql:8.0.21
     # [volumes] ディレクトリのマウント設定（dbデータなどを残せます）
     volumes:
       - mysql-data:/var/lib/mysql
@@ -30,4 +30,4 @@ services:
       MYSQL_ROOT_PASSWORD: 'admin'
       MYSQL_DATABASE: 'docker_sample_development'
 volumes:
-  db-volume:
+  mysql-data:

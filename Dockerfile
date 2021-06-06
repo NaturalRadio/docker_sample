@@ -9,8 +9,8 @@ RUN mkdir /docker_sample
 # [WORKDIR] 作業ディレクトリを設定
 WORKDIR /docker_sample
 # [COPY] ローカルのファイルをコンテナへコピー
-COPY Gemfile /docker_sample/Gemfile
-COPY Gemfile.lock /docker_sample/Gemfile.lock
+COPY Gemfile* /docker_sample/Gemfile
+COPY Gemfile.lock* /docker_sample/Gemfile.lock
 RUN bundle install
 COPY . /docker_sample
 
