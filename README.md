@@ -76,8 +76,8 @@ default: &default
   <!-- ここから修正 -->
   username: <%= ENV.fetch("MYSQL_USERNAME", "root") %>
   password: <%= ENV.fetch("MYSQL_PASSWORD", "admin") %>
-  <!-- ここまで修正 -->
   host: <%= ENV.fetch("MYSQL_HOST", "db") %>
+  <!-- ここまで修正 -->
 ```
 ⑦docker-compose run web rails db:create   
 ⑧docker-compose upでコンテナを起動⑨localhost::3000で立ち上がっているか確認   
